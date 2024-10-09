@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>VLM4OTSU: Vision-Language Models (VLMs) in Open Traffic Scene Understanding</title>
+        <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/bulma.min.css">
+        <script type="module"
+            src="https://unpkg.com/@google/model-viewer@2.0.1/dist/model-viewer.min.js"></script>
+        <link rel="manifest" href="site.webmanifest">
+
+        <meta property="og:site_name" content="VLM4OTSU" />
+        <meta property="og:type" content="video.other" />
+        <meta property="og:title"
+            content="VLM4OTSU: Vision-Language Models (VLMs) in Open Traffic Scene Understanding" />
+        <meta property="og:description"
+            content="WACV2025 Worshop VLM4OTSU: Vision-Language Models (VLMs) in Open Traffic Scene Understanding." />
+        <script type="module"
+            src="https://unpkg.com/@google/model-viewer@2.0.1/dist/model-viewer.min.js"></script>
+
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/codemirror.min.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/codemirror.min.js"></script>
+        <script src="assets/js/clipboard.min.js"></script>
+        <script src="assets/js/video_comparison.js"></script>
+        <script src="assets/js/app.js"></script>
+
+        <style>
+        .min-size-card {
+            min-height: 230px;
+            min-width: 180px;
+        }
+    </style>
+
+    </head>
+    <div>
+
+        <div class="highlight-clean" style="padding-bottom: 10px;">
+            <div class="container" style="max-width: 768px;">
+                <div class="row" id="title-row"
+                    style="max-width: 100%; margin: 0 auto; display: inline-block">
+                    <h1 class="col-md-12 text-center" id="title">
+                            <img src="assets\images\logos\WACV-2025-Logo.png" width="400px" >
+                            <br>
+                            <b style="color:#0F75BC">Workshop</b>
+                            <br>
+                            <br>
+                            <b style="color:#7F7F7F">VLM4OTSU:</b> <br>Vision-Language Models (VLMs) in Open Traffic Scene Understanding
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <ul class="nav nav-pills nav-justified">
+                            <li>
+                                <a href="#title">
+                                    <h4><strong>Home</strong></h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#call4paper">
+                                    <h4><strong>Submissions</strong></h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#speakers">
+                                    <h4><strong>Speakers</strong></h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#schedule">
+                                    <h4><strong>Schedule</strong></h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#program committees">
+                                    <h4><strong>Committees</strong></h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#organizers">
+                                    <h4><strong>Organizers</strong></h4>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="max-width: 768px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Introduction</h2>
+                    <p class="text-justify">
+                        Recent progress in scene understanding has been accompanied by 
+                        significant improvements in the multimodal information fusion 
+                        capabilities of vision-language models (VLMs). The open traffic 
+                        scene—a representative natural environment characterized by 
+                        high dynamism, uncertainty in weather conditions, background 
+                        complexity, environmental diversity, and dependency on traffic 
+                        rules, among other factors—poses numerous challenges but is 
+                        also closely related to daily life. Understanding the open 
+                        traffic scene can provide essential information for various 
+                        practical applications, such as autonomous driving, smart 
+                        transportation, intelligent traffic signal systems, and route 
+                        optimization. Compared with traditional CNN-based models, 
+                        VLMs offer a natural and effective approach to understanding 
+                        open traffic scenes due to their powerful image description 
+                        abilities. However, many challenges remain in VLM-based 
+                        traffic scene understanding. For instance, in autonomous 
+                        driving systems, how can we ensure VLMs can perceive driving 
+                        situations while maintaining sensitivity to changing natural 
+                        conditions and adapting to the uncertainty in open traffic 
+                        scenes? How can we design and construct VLMs that effectively 
+                        fuse different types of inputs (infrared images, RGB images, 
+                        3D point cloud data, etc.) to enhance scene understanding 
+                        capabilities? Furthermore, how can VLMs analyze directional 
+                        guidance objects (e.g., traffic signs, texts, lights, and 
+                        ground markers) with strong expert priors to support decision-making?
+
+                    </p>
+                    <p>
+                        This workshop aims to provide a platform for researchers in related 
+                        fields to share their latest work, while offering opportunities 
+                        to discuss the current state of open traffic scene understanding 
+                        and the limitations of VLMs in this task. Key questions include: 
+                        Can VLMs truly achieve open traffic scene understanding? How far 
+                        are current VLMs from reaching this goal? What optimizations are 
+                        necessary for VLMs to adapt to the hardware constraints of edge 
+                        devices in real-world deployment, and what are the associated impacts?
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        <div class="container" style="max-width: 768px;">
+            <hr class="divider" />
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="call4paper">Call for Papers</h2>
+                    <div class="content">
+                        <p class="text-justify">
+                            The WACV 2025 Vision-Language Models (VLMs) in Open Traffic Scene Understanding
+                            Workshop (<u><a
+                                    href=https://vlm4otsu.github.io/>https://vlm4otsu.github.io/</a></u>)
+                            seeks to cover a wide range of topics related to advancements in VLMs 
+                            for traffic scene understanding, including but not limited to:
+                        </p>
+                        <ul>
+                            <li>VLM-based Multimodal Data Fusion for Open Traffic Scene Understanding</li>
+                            <li>Adapting VLMs to Uncertain Natural Conditions in Autonomous Driving</li>
+                            <li>Traffic Sign and Signal Interpretation Using VLMs with Expert Priors</li>
+                            <li>Real-Time Edge Deployment of VLMs for Smart Transportation</li>
+                            <li>VLMs for Predictive Analytics in Dynamic Traffic Environments</li>
+                            <li>VLM-Based Robust Scene Parsing for Autonomous Vehicles</li>
+                            <li>Leveraging VLMs for Multi-Agent Collaboration in Traffic Systems</li>
+                            <li>Understanding Complex Traffic Situations Through VLM-Enhanced Scene 
+                                Comprehension</li>
+                            <li>Evaluation of VLMs for Open-World Traffic Scene Tasks</li>
+                            <li>Benchmarking VLMs for Multimodal Traffic Scene Datasets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 id="author_instruction">Style and Author Instructions</h3>
+                    <div class="content">
+                        <ul>
+                            <li><strong>Paper Length:</strong>
+                                We ask authors to use the official WACV2025
+                                template and limit submissions to 4-8 pages
+                                excluding references.
+                            </li>
+                            <li><strong>Dual Submissions:</strong>
+                                The workshop is non-archival. In addition, in
+                                light of the new single-track policy of WACV
+                                2025, we strongly encourage papers accepted to
+                                WACV 2025 to present at our workshop.
+                            </li>
+                            <li><strong>Presentation Forms:</strong>
+                                All accepted papers will get poster
+                                presentations during the workshop; selected
+                                papers will get oral presentations.
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="text-justify">
+                        All submissions should anonymized. Papers with more than
+                        4 pages
+                        (excluding references) will be reviewed as long papers,
+                        and papers with
+                        more than 8 pages (excluding references) will be
+                        rejected without
+                        review. Supplementary material is optional with
+                        supported formats: pdf, mp4 and zip.
+                        All papers that were not previously presented in a major
+                        conference,
+                        will be peer-reviewed by three experts in the
+                        field in a double-blind manner. In case you are
+                        submitting a
+                        previously accepted conference paper, please also attach
+                        a copy of the
+                        acceptance notification email in the supplementary
+                        material documents.
+                    </p>
+                    <p>
+                        All submissions should adhere to the <a
+                            href="https://wacv2025.thecvf.com/submissions/author-guidelines/">WACV
+                            2025 author
+                            guidelines</a>.
+                    </p>
+                    <p>
+                        <strong>Contact: </strong>
+                        If you have any questions, please contact <a
+                            href="otsuorg@gmail.com">otsuorg@gmail.com</a>.
+                    </p>
+                    <p>
+                        <strong>Submission Portal: </strong><a
+                            href="https://vlm4otsu.github.io">comming soon</a>
+                    </p>
+                    <p><strong>Paper Review Timeline:</strong>
+                        <table class="table">
+                            <tr>
+                                <th scope="col">Paper Submission and
+                                    supplemental material deadline</th>
+                                <td>comming soon</td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Notification to authors</th>
+                                <td>comming soon
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Camera ready deadline</th>
+                                <td>comming soon</td>
+                            </tr>
+                        </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--top-->
+        <div
+            class="d-grid gap-2 d-md-flex justify-content-md-end d-none d-md-block">
+            <a class="btn btn-primary me-md-2" role="button" href="#title">Top</a>
+        </div>
+
+        <br>
+        <div class="container" style="max-width: 768px;">
+            <hr class="divider" />
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="speakers">Invited Speakers</h2>
+                    <a href="https://zhaoj9014.github.io/index.html">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="columns is-vcentered">
+                                    <div class="column is-one-quarter">
+                                        <figure class="image is-128x128">
+                                            <img class="is-rounded"
+                                                src="assets\images\speakers\JianZhao.jpg"
+                                                alt="Jian Zhao">
+                                        </figure>
+                                    </div>
+                                    <div class="column">
+                                        <p class="title is-3">Jian Zhao</p>
+                                        <p class="subtitle is-5">Leader of Evolutionary Vision+x 
+                                            Oriented Learning (EVOL) Lab & Principal Research 
+                                            Scientist</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    Jian Zhao is currently the Leader of EVOL Lab & a 
+                                    Principal Research Scientist with the Institute of AI 
+                                    (TeleAI), China Telecom, Beijing, P.R. China, and a 
+                                    Researcher & Ph.D. Supervisor with School of Artificial 
+                                    Intelligence, Optics and Electronics (iOPEN), Northwestern 
+                                    Polytechnical University (NWPU), Xi'an Shanxi, P.R. China. 
+                                    Previously, He was an Assistant Researcher with Academy of 
+                                    Military Sciences (AMS), Beijing, P.R. China. He received 
+                                    his Ph.D. degree from National University of Singapore (NUS) 
+                                    in 2019 under the supervision of Assist. Prof. Jiashi Feng, 
+                                    Assoc. Prof. Shuicheng Yan, and Prof. Hengzhu Liu, Master 
+                                    degree from National University of Defense Technology (NUDT) 
+                                    in 2014 under the supervision of Prof. Xucan Chen, and Bachelor 
+                                    degree from Beihang University (BUAA) in 2012 under the 
+                                    supervision of Dr. Shaopeng Dong and Prof. Mei Yuan. He was 
+                                    supported by China Scholarship Council (CSC) and School of 
+                                    Computer, NUDT to pursue his Ph.D. degree at Learning and Vision 
+                                    Group, Faculty of Engineering (FOE), Department of Electrical 
+                                    and Computer Engineering (ECE), NUS, Singapore.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <br>
+                    <a href="https://scholar.google.com/citations?user=7t12hVkAAAAJ&hl=zh-CN&oi=ao">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="columns is-vcentered">
+                                    <div class="column is-one-quarter">
+                                        <figure class="image is-128x128">
+                                            <img class="is-rounded"
+                                                src="assets\images\speakers\ZuxuanWu.png"
+                                                alt="Zuxuan Wu">
+                                        </figure>
+                                    </div>
+                                    <div class="column">
+                                        <p class="title is-3">Zuxuan Wu</p>
+                                        <p class="subtitle is-5">Associate Professor at Fudan University</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    Zuxuan Wu is an Associate Professor in School of 
+                                    Computer Science at Fudan University, 
+                                    and a member of the Fudan Vision and Learning 
+                                    Laboratory. He recieved his Ph.D. in Computer Science 
+                                    from the University of Maryland with Prof. Larry 
+                                    Davis in 2020. His research interests are in computer 
+                                    vision and deep learning. His current research particularly 
+                                    focuses on large-scale video understanding, video 
+                                    generation, and efficient architectures.
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <br>
+                    <a href="https://scholar.google.com/citations?user=8VCYME8AAAAJ&hl=zh-CN&oi=ao">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="columns is-vcentered">
+                                    <div class="column is-one-quarter">
+                                        <figure class="image is-128x128">
+                                            <img class="is-rounded"
+                                                src="assets\images\speakers\JiaWan.jpg"
+                                                alt="Jia Wan">
+                                        </figure>
+                                    </div>
+                                    <div class="column">
+                                        <p class="title is-3">Jia Wan</p>
+                                        <p class="subtitle is-5"> Professor at the Harbin Institute of 
+                                            Technology (Shenzhen)</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    Jia Wan  is a Professor at the Harbin Institute of 
+                                    Technology (Shenzhen) in the School of Computer 
+                                    Science and Technology. Before joining HITSZ, 
+                                    he was a Posdoc in the Statistical Visual Computing 
+                                    Laboratory (SVCL), University of California, San Diego, 
+                                    advised by Prof. Nuno Vasconcelos and at Boston College, 
+                                    supervised by Prof. Donglai Wei. He received the Ph.D 
+                                    degree in the Video, Image, and Sound Analysis Lab (VISAL), 
+                                    City University of Hong Kong, supervised by Prof. Antoni B. Chan.
+
+                                    He received the M.Sc. degree in the School of Computer 
+                                    Science and the Center for OPTical IMagery Analysis and 
+                                    Learning (OPTIMAL), supervised by Prof. Qi Wang, and 
+                                    B.Eng. degree at the Software Engineering School in 
+                                    Northwestern Polytechnical University, Xi'an, Shaanxi, 
+                                    China. In 2018, He was an intern at Tencent AI Lab in 
+                                    Shenzhen, working with Dr. Wenhan Luo and Dr. Baoyuan Wu.
+                                    
+                                    His research interests include computer vision, intelligent 
+                                    transportation, crowd analysis, and brain image analysis.
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <br>
+                    <a href="https://scholar.google.com/citations?user=QgbraMIAAAAJ&hl=zh-CN&oi=ao">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="columns is-vcentered">
+                                    <div class="column is-one-quarter">
+                                        <figure class="image is-128x128">
+                                            <img class="is-rounded"
+                                                src="assets\images\speakers\HaoyuChen.jpg"
+                                                alt="Haoyu Chen">
+                                        </figure>
+                                    </div>
+                                    <div class="column">
+                                        <p class="title is-3">Haoyu Chen</p>
+                                        <p class="subtitle is-5">Assistant Professor at University of Oulu</p>
+                                    </div>
+                                </div>
+                                <p class="text-justify">
+                                    Haoyu Chen is a Tenure-track Assistant Professor at CMVS, 
+                                    University of Oulu. Before that, I conducted Postdoc research 
+                                    in CMVS, University of Oulu, with the project of in Emotion 
+                                    AI (Academy Finland project) and trustworthy AI (Infotech project). 
+                                    He received His Ph.D. from University of Oulu , Finland, where 
+                                    He was advised by Academy Professor Guoying Zhao. During his PhD 
+                                    study, I visited CEL, TUDelft, the Netherlands. Prior to that, 
+                                    He received the B.E. degree from China University of Geosciences, 
+                                    China, and Master degree from University of Oulu, Finland.
+
+                                    His research interests include Machine Learning, Human Behaviour 
+                                    Analysis, Emotion AI and Adversarial Learning.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <!--top-->
+        <div
+            class="d-grid gap-2 d-md-flex justify-content-md-end d-none d-md-block">
+            <a class="btn btn-primary me-md-2" role="button" href="#title">Top</a>
+        </div>
+
+        <div class="container" style="max-width: 768px;">
+            <hr class="divider" />
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="schedule">Tentative Schedule</h2>
+                    <div class="content">
+                        <div class="row">
+                            <div class="col">
+                                <div class="col-xs-12">
+                                    <table class="table  table-striped">
+                                        <tr>
+                                            <td>Opening remarks and welcome</td>
+                                            <td>02:00 PM - 02:05 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jian Zhao</td>
+                                            <td>02:10 PM - 02:35 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zuxuan Wu</td>
+                                            <td>02:40 PM - 03:05 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jia Wan</td>
+                                            <td>03:10 PM - 03:35 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Haoyu Chen</td>
+                                            <td>03:40 AM - 04:05 PM</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Oral Session</td>
+                                            <td>04:15 PM - 05:00 PM</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Programs Committees-->
+        <br>
+        <div class="container" style="max-width: 768px;">
+            <hr class="divider" />
+            <div class="row">
+                <h2 id="program committees">Program Committees</h2><br>
+                <div class="columns is-centered">
+                    <div
+                        class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                        <a href="https://crabwq.github.io/">
+                            <div class="card min-size-card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="is-rounded"
+                                            src="assets/images/committees/QiWang.jpg"
+                                            alt="QiWang"
+                                            style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content"
+                                            style="overflow-x: unset;">
+                                            <p class="title is-3">Qi Wang</p>
+                                            <p class="subtitle is-5">Northwestern Polytechnical University</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                        class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                        <a href="https://gjy3035.github.io/">
+                            <div class="card min-size-card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="is-rounded"
+                                            src="assets/images/committees/JunyuGao.png"
+                                            alt="Junyu Gao"
+                                            style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content"
+                                            style="overflow-x: unset;">
+                                            <p class="title is-3">Junyu Gao</p>
+                                            <p class="subtitle is-5">Northwestern Polytechnical University</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                        class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                        <a href="https://js.chd.edu.cn/qcxy/gy/list.htm">
+                            <div class="card min-size-card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="is-rounded"
+                                            src="assets/images/committees/YangGao.jpg"
+                                            alt="Yang Gao"
+                                            style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content"
+                                            style="overflow-x: unset;">
+                                            <p class="title is-3">Yang Gao</p>
+                                            <p class="subtitle is-5">       Chang'an University ᅟᅠ        ‌‍‎‏  ᅟᅠ        ‌‍‎‏ </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                        class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                        <a href="https://ninghailong.github.io/HL/">
+                            <div class="card min-size-card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="is-rounded"
+                                            src="assets/images/committees/HailongNing.jpg"
+                                            alt="Hailong Ning"
+                                            style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content"
+                                            style="overflow-x: unset;">
+                                            <p class="title is-3">Hailong Ning</p>
+                                            <p class="subtitle is-5">Xi'an University of Posts and Telecommunications</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Organizers-->
+        <br>
+        <div class="container" style="max-width: 768px;">
+            <hr class="divider" />
+            <div class="row">
+                <h2 id="organizers">Organizers</h2><br>
+                <div class="columns is-centered">
+                    <div
+                        class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                        <a href="https://scholar.google.com/citations?user=8P7q1wQAAAAJ&hl=zh-CN">
+                            <div class="card min-size-card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="is-rounded"
+                                            src="assets/images/organizers/MulinChen.jpg"
+                                            alt="Mulin Chen"
+                                            style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content"
+                                            style="overflow-x: unset;">
+                                            <p class="title is-3">Mulin Chen</p>
+                                            <p class="subtitle is-5">Northwestern Polytechnical University</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                        class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                        <a href="https://omtcyang.github.io/">
+                            <div class="card min-size-card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img class="is-rounded"
+                                            src="assets/images/organizers/ChuangYang.jpg"
+                                            alt="Chuang Yang"
+                                            style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content"
+                                            style="overflow-x: unset;">
+                                            <p class="title is-3">Chuang Yang</p>
+                                            <p class="subtitle is-5">The Hong Kong Polytechnic University</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                    class="column col-md-3 col-sm-3 col-xs-4 text-center center-block">
+                    <a href="https://scholar.google.com/citations?hl=zh-CN&user=Er0gOskAAAAJ">
+                        <div class="card min-size-card">
+                            <div class="card-image">
+                                <figure class="image">
+                                    <img class="is-rounded"
+                                        src="assets/images/organizers/YawenCui.jpg"
+                                        alt="Yawen Cui"
+                                        style="max-width: 150px; max-height: 150px;  margin: auto;">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content"
+                                        style="overflow-x: unset;">
+                                        <p class="title is-3">Yawen Cui</p>
+                                        <p class="subtitle is-5"> ᅟᅠ        ‌‍‎‏ University of Oulu           ᅟᅠ        ‌‍‎‏  ᅟᅠ        ‌‍‎‏ ᅟᅠ        ‌‍‎‏ </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!--top-->
+        <div
+            class="d-grid gap-2 d-md-flex justify-content-md-end d-none d-md-block">
+            <a class="btn btn-primary me-md-2" role="button" href="#title">Top</a>
+        </div>
+    </body>
+
+</html>
